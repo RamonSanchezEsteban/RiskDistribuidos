@@ -6,6 +6,13 @@ public class territorio {
 	private int jugador;
 	private int tropas;
 	
+	public territorio(String nombre_in)
+	{
+		this.nombre=nombre_in;
+		this.jugador=-1;
+		this.tropas=0;
+	}
+	
 	public territorio(String nombre_in, int jugador_in, int tropas_in)
 	{
 		this.nombre = nombre_in;
@@ -36,6 +43,22 @@ public class territorio {
 	public void setTropas(int tropas_in)
 	{
 		this.tropas=tropas_in;
-	}	
+	}
+	
+	public boolean equals(territorio t1)
+	{
+		return this.nombre==t1.nombre;
+	}
+	
+	public void setTerritorioVacio()
+	{
+		this.jugador = -1;
+		this.tropas  = 0;
+	}
+	
+	public boolean estaVacio()
+	{
+		return (this.jugador == -1 && this.tropas == 0);
+	}
 	
 }
