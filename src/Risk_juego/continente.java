@@ -1,8 +1,9 @@
 package Risk_juego;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class continente 
+public class continente implements Serializable
 {
 	private String nombre;
 	private ArrayList<territorio> territorios;
@@ -41,6 +42,11 @@ public class continente
 	public ArrayList<territorio> territorios()
 	{
 		return this.territorios;
+	}
+	
+	public String nombre()
+	{
+		return this.nombre;
 	}
 	
 	public int valor()
@@ -92,4 +98,17 @@ public class continente
 		}		
 		return true;
 	}
+	
+	public String toString()
+	{
+		String s = this.nombre + "\n" + "Valor: " + this.valor + "\n" + "territorios: " + "\n";
+		int i=0;
+		while(i<this.territorios.size())
+		{
+			s = s + this.territorios.get(i);
+			i++;
+		}		
+		return s;
+	}
+	
 }

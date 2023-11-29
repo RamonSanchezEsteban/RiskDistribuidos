@@ -1,10 +1,11 @@
 package Risk_juego;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
 
-public class tablero 
+public class tablero implements Serializable
 {	
 	private String nombre;
 	private ArrayList<territorio> territorios;
@@ -16,6 +17,18 @@ public class tablero
 		this.nombre=nombre_in;
 		this.territorios = new ArrayList(100);
 		this.fronteras = new boolean[100][100];
+		int i=0;
+		int j=0;
+		while(i<100)
+		{
+			j=0;
+			while(j<100)
+			{
+				this.fronteras[i][j]=false;	
+				j++;
+			}
+			i++;			
+		}
 		this.continentes = new ArrayList(30);
 	}
 
@@ -24,6 +37,18 @@ public class tablero
 		this.nombre=nombre_in;
 		this.territorios=territorios_in;
 		this.fronteras = new boolean[100][100];
+		int i=0;
+		int j=0;
+		while(i<100)
+		{
+			j=0;
+			while(j<100)
+			{
+				this.fronteras[i][j]=false;	
+				j++;
+			}
+			i++;			
+		}
 		this.continentes = new ArrayList(30);
 	}
 
@@ -35,7 +60,7 @@ public class tablero
 		this.continentes=continentes_in;
 	}
 	
-	public String getNombre()
+ 	public String getNombre()
 	{
 		return this.nombre;
 	}
@@ -432,6 +457,11 @@ public class tablero
 		return L;
 	}
 
+	public boolean[][] fronteras()
+	{
+		return this.fronteras;
+	}
+	
 	public boolean ponerTropas(int tropas, territorio t)
 	{
 		if (this.territorios.contains(t))
@@ -440,6 +470,53 @@ public class tablero
 			return true;
 		}
 		return false;
+	}
+	
+	public territorio contruirTerritorioExistente(String nombre_territorio)
+	{
+		int i=0;
+		while(i<this.territorios.size())
+		{
+			if (nombre_territorio.equals(this.territorios.get(i).getNombre()))
+			{
+				return this.territorios.get(i);
+			}
+			i++;
+		}
+		return null;
+	}
+
+	public continente contruirContinenteExistente(String nombre_continente)
+	{
+		int i=0;
+		while(i<this.continentes.size())
+		{
+			if (nombre_continente.equals(this.continentes.get(i).nombre()))
+			{
+				return this.continentes.get(i);
+			}
+			i++;
+		}
+		return null;
+	}
+
+	public String toString()
+	{
+		String s = "Nombre Tablero: " + this.nombre + "\n" + "territorios: " + "\n";
+		int i=0;
+		while(i<this.territorios.size())
+		{
+			s = s + this.territorios.get(i);
+			i++;
+		}		
+		i=0;
+		s = s + "continentes: " + "\n"; 
+		while(i<this.continentes.size())
+		{
+			s = s + this.continentes.get(i);
+			i++;
+		}		
+		return s;
 	}
 	
 	public int min(int a, int b)

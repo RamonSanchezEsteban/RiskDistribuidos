@@ -1,6 +1,10 @@
 package Risk_juego;
 
-public class territorio {
+import java.io.Serializable;
+
+public class territorio implements Serializable
+
+{
 	
 	private String nombre;
 	private int jugador;
@@ -59,6 +63,16 @@ public class territorio {
 	public boolean estaVacio()
 	{
 		return (this.jugador == -1 && this.tropas == 0);
+	}
+	
+	public void sumarTropas(int tropas)
+	{
+		this.tropas = this.tropas +tropas;
+	}
+	
+	public String toString()
+	{
+		return (this.nombre + "\n" + "Propietario: " + this.jugador + "\n" + "Tropas: " + this.tropas + "\n");
 	}
 	
 }
