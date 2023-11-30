@@ -5,7 +5,7 @@ import java.io.Serializable;
 public class territorio implements Serializable
 
 {
-	
+	private static final long serialVersionUID = -1300590308104224863L;
 	private String nombre;
 	private int jugador;
 	private int tropas;

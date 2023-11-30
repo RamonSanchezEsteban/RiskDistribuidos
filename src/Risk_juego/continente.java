@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 public class continente implements Serializable
 {
+	private static final long serialVersionUID = -8228340216688593113L;
 	private String nombre;
 	private ArrayList<territorio> territorios;
 	private int valor;

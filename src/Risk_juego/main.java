@@ -13,11 +13,11 @@ public class main {
 	public static void main(String[] args) 
 	{
 		
-/*				
+				
 		tablero tablero1 = new tablero("");
 		
 		try( 
-		FileInputStream f = new FileInputStream("archivos/JuegoBasicoDefinitivo7");
+		FileInputStream f = new FileInputStream("archivos/JuegoBasicoDefinitivo7.risk");
 		ObjectInputStream ois= new ObjectInputStream(f);
 		)
 		{
@@ -54,11 +54,15 @@ public class main {
 			{
 				
 				//Colocacion de tropas
+				System.out.print("\n\n");
 				
 				System.out.println("Fase de colocacion");
 				
+				System.out.print("\n\n");
+				
 				tropasRecibidas = tablero1.calculoNuevasTropas(jugador);
-				System.out.println("Recibes las siguintes tropas: " + tropasRecibidas);
+				System.out.println(tablero1.territoriosJugador(jugador).toString());
+				System.out.println("Recibes las siguintes tropas: " + tropasRecibidas);				
 				while(tropasRecibidas != 0)
 				{
 					System.out.println("Escribe un territorio tuyo para poner tropas:");
@@ -88,9 +92,17 @@ public class main {
 					System.out.println("Tropas Restantes a colocar: " + tropasRecibidas);
 				}
 				
+				System.out.print("\n\n");
+				System.out.print("Fase de Colocacion terminada");
+				System.out.print("\n\n");
+				aux = sc.nextLine();
+				
 				//Ataque de territorios
 				
+				System.out.print("\n\n");
 				System.out.println("Fase de ataque");
+				System.out.print("\n\n");
+				aux = sc.nextLine();
 				
 				while(seguirAtacando)
 				{
@@ -98,13 +110,20 @@ public class main {
 					System.out.println(tablero1.territoriosJugador(jugador).toString());
 					System.out.println("Escribe el nombre de territorio que ataca:");
 					nombreTerritorio1 = sc.nextLine();
+					
+					t1 = tablero1.contruirTerritorioExistente(nombreTerritorio1);
+					
+					System.out.println("Posibles territorios a atacar:");					
+					System.out.print("\n\n");
+					System.out.println(tablero1.territoriosFronterizosEnemigos(t1).toString());
+					System.out.print("\n\n");
+					
 					System.out.println("Escribe el nombre del territorio enemigo que atacas:");
 					nombreTerritorio2 = sc.nextLine();
 					System.out.println("Escribe el número de tropas con las que atacas:");
 					aux = sc.nextLine();
 					tropasAtacantes = Integer.parseInt(aux);
-					
-					t1 = tablero1.contruirTerritorioExistente(nombreTerritorio1);
+										
 					t2 = tablero1.contruirTerritorioExistente(nombreTerritorio2);
 					
 					if	(	
@@ -125,6 +144,8 @@ public class main {
 						else
 						{
 							tablero1.batallaGlobal(	t1,t2,tropasAtacantes);
+							System.out.println(t1.toString());
+							System.out.println(t2.toString());							
 						}
 					}
 					
@@ -178,8 +199,7 @@ public class main {
 			}
 			jugador = (jugador % 4) + 1;
 		}
-		
-*/		
+				
 		
 /*
 		
@@ -360,7 +380,7 @@ public class main {
 		sc.close();
 */ 
 		
-///*		
+/*		
 		tablero tablero2 = new tablero("");
 		
 		try( 
@@ -389,7 +409,7 @@ public class main {
 		{
 			System.out.println("no tiene frontera");
 		}
-//*/		
+*/		
 	}
 
 }

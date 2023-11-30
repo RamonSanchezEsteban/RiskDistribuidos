@@ -7,6 +7,8 @@ import java.util.Random;
 
 public class tablero implements Serializable
 {	
+	
+	private static final long serialVersionUID = 7245126196912939415L;
 	private String nombre;
 	private ArrayList<territorio> territorios;
 	private boolean[][] fronteras;
@@ -183,6 +185,7 @@ public class tablero implements Serializable
 			if(td.getTropas() == 0)
 			{
 				System.out.println("Territorio conquistado");
+				ta.setTropas(ta.getTropas() - tropasRestantes);
 				td.setJugador(ta.getJugador());
 				td.setTropas(tropasRestantes);
 				return true;
@@ -383,7 +386,7 @@ public class tablero implements Serializable
 		
 		tropasNuevas = tropasNuevas + (this.numeroTerritoriosPoseidos(jugador)/3);
 				
-		return tropasNuevas;
+		return max(tropasNuevas,3);
 	}
 	
 	public boolean existeCaminoJugador(territorio t1, territorio t2)
@@ -456,6 +459,24 @@ public class tablero implements Serializable
 		}		
 		return L;
 	}
+	
+	public ArrayList<territorio> territoriosFronterizosEnemigos(territorio territorioAtacante)
+	{
+		ArrayList<territorio> L = new ArrayList(100);		
+		int i = 0;
+		while(i < this.territorios.size())
+		{
+			if(
+					this.territorios.get(i).getJugador() != territorioAtacante.getJugador() &&
+					this.tieneFrontera(territorioAtacante, this.territorios().get(i))
+			)
+			{
+				L.add(this.territorios.get(i));
+			}
+			i++;
+		}		
+		return L;
+	}	
 
 	public boolean[][] fronteras()
 	{
