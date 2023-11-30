@@ -13,16 +13,39 @@ public class main {
 	public static void main(String[] args) 
 	{
 		
-				
+/*      //simulador batallas
 		tablero tablero1 = new tablero("");
+		territorio t1 = new territorio("a",1,30);
+		territorio t2 = new territorio("b",2,20);
 		
+		tablero1.anadirTerritorio(t1);
+		tablero1.anadirTerritorio(t2);
+		tablero1.anadirFrontera(t1, t2);
+		
+		System.out.println(t1.toString());
+		System.out.println(t2.toString());		
+		
+		System.out.println("Empieza batalla");
+		
+		tablero1.batallaGlobal(t1, t2, 25);
+		
+		System.out.println("Batalla finalizada");
+		
+		System.out.println(t1.toString());
+		System.out.println(t2.toString());
+
+*/	
+	
+		//Juego principal
+		
+/*		
+		tablero tablero1 = new tablero("");
 		try( 
-		FileInputStream f = new FileInputStream("archivos/JuegoBasicoDefinitivo7.risk");
+		FileInputStream f = new FileInputStream("archivos/JuegoBasicoDefinitivo8.risk");
 		ObjectInputStream ois= new ObjectInputStream(f);
 		)
 		{
-			tablero1 = (tablero) ois.readObject();
-			System.out.println(tablero1.toString());
+			tablero1 = (tablero) ois.readObject();			
 		} catch(IOException | ClassNotFoundException e)
 		{
 			e.printStackTrace();
@@ -38,10 +61,13 @@ public class main {
 		int tropasAtacantes;
 		int tropasMovidas;
 		boolean seguirAtacando = true;
+		boolean seguirReforzando = true;
 		territorio t1,t2;
 		
 		System.out.println("Inicio de partida");
 		aux = sc.nextLine();
+		
+		System.out.println(tablero1.toString());
 		
 		while(true)
 		{
@@ -55,10 +81,9 @@ public class main {
 				
 				//Colocacion de tropas
 				System.out.print("\n\n");
-				
 				System.out.println("Fase de colocacion");
-				
 				System.out.print("\n\n");
+				System.out.println("Estos son tus territorios:");
 				
 				tropasRecibidas = tablero1.calculoNuevasTropas(jugador);
 				System.out.println(tablero1.territoriosJugador(jugador).toString());
@@ -104,6 +129,13 @@ public class main {
 				System.out.print("\n\n");
 				aux = sc.nextLine();
 				
+				System.out.println("Quieres atacar? (y/n)");
+				aux = sc.nextLine();
+				if(!aux.equals("y"))
+				{
+					seguirAtacando = false;
+				}
+				
 				while(seguirAtacando)
 				{
 					System.out.println("ataca un territorio fronterizo a uno de los tuyos:");
@@ -130,7 +162,7 @@ public class main {
 							t1.getJugador() != jugador 		||
 							t2.getJugador() == jugador 		||
 							!tablero1.tieneFrontera(t1, t2)	||
-							tropasAtacantes <= 1
+							tropasAtacantes < 1
 						)
 					{
 						System.out.println("Datos de ataque incorrectos");
@@ -168,38 +200,46 @@ public class main {
 				
 				//Fase de reforzar
 				
+				
+				
 				System.out.println("Fase de reforzar");
-				System.out.println("Escribe el territorio del que salen las tropas");
-				nombreTerritorio1 = sc.nextLine();
-				System.out.println("Escribe el territorio al que van las tropas");
-				nombreTerritorio2 = sc.nextLine();
-				System.out.println("Escribe el numero de tropas que vas a mover");
-				aux = sc.nextLine();
-				tropasMovidas = Integer.parseInt(aux);
 				
-				t1 = tablero1.contruirTerritorioExistente(nombreTerritorio1);
-				t2 = tablero1.contruirTerritorioExistente(nombreTerritorio2);
-				
-				if(tropasMovidas >= t1.getTropas() || tropasMovidas <= 0 )
+				while(seguirReforzando)
 				{
-					System.out.println("numero de tropas incorrecto");
-				}
-				else
-				{
-					if(	t1.getJugador() != jugador || ! tablero1.existeCaminoJugador(t1,t2)	)
+					System.out.println("Escribe el territorio del que salen las tropas");
+					nombreTerritorio1 = sc.nextLine();
+					System.out.println("Escribe el territorio al que van las tropas");
+					nombreTerritorio2 = sc.nextLine();
+					System.out.println("Escribe el numero de tropas que vas a mover");
+					aux = sc.nextLine();
+					tropasMovidas = Integer.parseInt(aux);
+					
+					t1 = tablero1.contruirTerritorioExistente(nombreTerritorio1);
+					t2 = tablero1.contruirTerritorioExistente(nombreTerritorio2);
+					
+					if(tropasMovidas >= t1.getTropas() || tropasMovidas <= 0 )
 					{
-						System.out.println("territorios incorrectos");
+						System.out.println("numero de tropas incorrecto");
 					}
 					else
 					{
-						tablero1.moverTropas(t1, t2, tropasMovidas);
-						System.out.println("tropasMovidas");
+						if(	t1.getJugador() != jugador || ! tablero1.existeCaminoJugador(t1,t2)	)
+						{
+							System.out.println("territorios incorrectos");
+						}
+						else
+						{
+							tablero1.moverTropas(t1, t2, tropasMovidas);
+							System.out.println("tropasMovidas");
+							seguirReforzando = false;
+						}
 					}
-				}		
+				}						
 			}
 			jugador = (jugador % 4) + 1;
-		}
-				
+		}				
+
+*/		
 		
 /*
 		
@@ -325,11 +365,11 @@ public class main {
 		
 */		
 
-/*		
+///*		
 		tablero tablero2 = new tablero("");
 		
 		try( 
-		FileInputStream f = new FileInputStream("archivos/juegoBasicoDefinitivo5.risk");
+		FileInputStream f = new FileInputStream("archivos/juegoBasicoDefinitivo7.risk");
 		ObjectInputStream ois= new ObjectInputStream(f);
 		)
 		{
@@ -366,7 +406,7 @@ public class main {
         }
         
 		try( 
-		FileOutputStream f = new FileOutputStream("archivos/JuegoBasicoDefinitivo6.risk");
+		FileOutputStream f = new FileOutputStream("archivos/JuegoBasicoDefinitivo8.risk");
 		ObjectOutputStream oos= new ObjectOutputStream(f);
 		)
 		{
@@ -378,7 +418,7 @@ public class main {
 		}
 		
 		sc.close();
-*/ 
+//*/ 
 		
 /*		
 		tablero tablero2 = new tablero("");
@@ -394,14 +434,12 @@ public class main {
 		{
 			e.printStackTrace();
 		}
+				
+		ArrayList<territorio> L = new ArrayList(150);
+		tablero2.calcularTerritoriosConectados(tablero2.contruirTerritorioExistente("Escandinavia"), 10, L);
+		System.out.println(L.toString());
 		
-		tablero2.contruirTerritorioExistente("Siberia").setJugador(2);
-		tablero2.contruirTerritorioExistente("Siberia").setTropas(3);
-		tablero2.contruirTerritorioExistente("Yakutsk").setJugador(3);
-		tablero2.contruirTerritorioExistente("Yakutsk").setTropas(3);
-		
-		
-		if(tablero2.tieneFrontera(tablero2.contruirTerritorioExistente("Yakutsk"), tablero2.contruirTerritorioExistente("Kamchatka")))
+		if(tablero2.tieneFrontera(tablero2.contruirTerritorioExistente("Escandinavia"), tablero2.contruirTerritorioExistente("Ucrania")))
 		{
 			System.out.println("tiene frontera");
 		}

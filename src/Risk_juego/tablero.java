@@ -172,12 +172,18 @@ public class tablero implements Serializable
 			return false;
 		}
 		
+		int tropasMinimas = ta.getTropas()-tropasAtacante;
 		int tropasRestantes;
 		
-		while(ta.getTropas()-tropasAtacante > 0)
+		while(tropasMinimas < ta.getTropas()  )
 		{
-			tropasRestantes = this.batallaLocal(ta, td, min(3, ta.getTropas()-tropasAtacante));
-			if(ta.getTropas()-tropasAtacante == 0)		
+			tropasRestantes = this.batallaLocal(ta, td, min(3, ta.getTropas()-tropasMinimas));
+			
+			//System.out.println(ta.toString());			
+			//System.out.println(td.toString());
+			//System.out.print("\n\n");
+			
+			if(tropasMinimas == ta.getTropas())		
 			{
 				System.out.println("Ataque Fallido");				
 				return true;
@@ -398,19 +404,19 @@ public class tablero implements Serializable
 	
 	public void calcularTerritoriosConectados(territorio t, int i, ArrayList<territorio> L)
 	{
-		if(i > 10)
+		if(i >= 0)
 		{			
 			L.add(t);
 			int j = 0;
 			while(j < this.territorios.size())
 			{
 				if		(
-						this.tieneFrontera(t, this.territorios.get(i)) && 
-						t.getJugador() == this.territorios.get(i).getJugador() && 
-						!L.contains(this.territorios.get(i))
+						this.tieneFrontera(t, this.territorios.get(j)) && 
+						t.getJugador() == this.territorios.get(j).getJugador() && 
+						!L.contains(this.territorios.get(j))
 						)
 				{
-					this.calcularTerritoriosConectados(this.territorios.get(i), i-1 , L);
+					this.calcularTerritoriosConectados(this.territorios.get(j), i-1 , L);
 				}
 				j++;
 			}
