@@ -15,6 +15,12 @@ public class servidor {
 
 	public static void main(String[] args) {
 		
+		partida p1 = new partida("partida1", 5000);
+		
+		p1.start();
+		
+		
+/*		
 		ServerSocket ss = null;
 		Socket[] socketJugadores = new Socket[10];
 		DataOutputStream [] dout = new DataOutputStream[10];
@@ -101,7 +107,7 @@ public class servidor {
 			
 		
 		
-		
+*/		
 	}
 
 }
