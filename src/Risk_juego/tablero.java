@@ -9,6 +9,7 @@ public class tablero implements Serializable
 {	
 	
 	private static final long serialVersionUID = 7245126196912939415L;
+	private int turnoJugador;
 	private String nombre;
 	private ArrayList<territorio> territorios;
 	private boolean[][] fronteras;
@@ -60,6 +61,16 @@ public class tablero implements Serializable
 		this.territorios=territorios_in;
 		this.fronteras=fronteras_in;
 		this.continentes=continentes_in;
+	}
+	
+	public int turnoJugador()
+	{
+		return this.turnoJugador;
+	}
+	
+	public void setTurnoJugador(int i)
+	{
+		this.turnoJugador = i;
 	}
 	
  	public String getNombre()
@@ -529,7 +540,7 @@ public class tablero implements Serializable
 
 	public String toString()
 	{
-		String s = "Nombre Tablero: " + this.nombre + "\n" + "territorios: " + "\n";
+		String s = "Nombre Tablero: " + this.nombre + "\n" + "turno de jugador" + this.turnoJugador + "\n" + "territorios: " + "\n";
 		int i=0;
 		while(i<this.territorios.size())
 		{

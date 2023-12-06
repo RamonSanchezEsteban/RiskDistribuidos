@@ -365,11 +365,11 @@ public class main {
 		
 */		
 
-///*		
+/*		
 		tablero tablero2 = new tablero("");
 		
 		try( 
-		FileInputStream f = new FileInputStream("archivos/juegoBasicoDefinitivo7.risk");
+		FileInputStream f = new FileInputStream("archivos/juegoBasicoDefinitivo8.risk");
 		ObjectInputStream ois= new ObjectInputStream(f);
 		)
 		{
@@ -405,8 +405,9 @@ public class main {
         	}
         }
         
+        
 		try( 
-		FileOutputStream f = new FileOutputStream("archivos/JuegoBasicoDefinitivo8.risk");
+		FileOutputStream f = new FileOutputStream("archivos/JuegoBasicoDefinitivo9.risk");
 		ObjectOutputStream oos= new ObjectOutputStream(f);
 		)
 		{
@@ -418,23 +419,25 @@ public class main {
 		}
 		
 		sc.close();
-//*/ 
+*/ 
 		
-/*		
+///*		
 		tablero tablero2 = new tablero("");
 		
 		try( 
-		FileInputStream f = new FileInputStream("archivos/JuegoBasicoDefinitivo7.risk");
+		FileInputStream f = new FileInputStream("archivos/JuegoBasicoDefinitivo9.risk");
 		ObjectInputStream ois= new ObjectInputStream(f);
 		)
 		{
 			tablero2 = (tablero) ois.readObject();
-			System.out.println(tablero2.toString());
+			//System.out.println(tablero2.toString());
 		} catch(IOException | ClassNotFoundException e)
 		{
 			e.printStackTrace();
 		}
-				
+		
+		System.out.println(tablero2.turnoJugador());
+		
 		ArrayList<territorio> L = new ArrayList(150);
 		tablero2.calcularTerritoriosConectados(tablero2.contruirTerritorioExistente("Escandinavia"), 10, L);
 		System.out.println(L.toString());
@@ -447,7 +450,7 @@ public class main {
 		{
 			System.out.println("no tiene frontera");
 		}
-*/		
+//*/		
 	}
 
 }
