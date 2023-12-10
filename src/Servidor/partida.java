@@ -44,7 +44,7 @@ public class partida extends Thread{
 				ObjectInputStream ois0 = new ObjectInputStream(f);
 				)
 				{
-					tablero = (tablero) ois0.readObject();
+					this.tablero = (tablero) ois0.readObject();
 					System.out.println("partida " + this.nombrePartida + ": " + "tablero leido");
 				} catch(IOException | ClassNotFoundException e)
 				{
@@ -54,54 +54,70 @@ public class partida extends Thread{
 		
 		try
 		{
-			ss = new ServerSocket(5000);	
+			ss = new ServerSocket(this.host);	
 			System.out.println("partida " + this.nombrePartida + ": " + "Servidor iniciado");			
 			
 			while(jugador < 5)
 			{
 				socketJugadores[jugador] = ss.accept();
-				dout [jugador]= new DataOutputStream(socketJugadores[jugador].getOutputStream());
-				oout [jugador]= new ObjectOutputStream(socketJugadores[jugador].getOutputStream());
-				oit[jugador] = new ObjectInputStream(socketJugadores[jugador].getInputStream());	
-				System.out.println("partida " + this.nombrePartida + ": " + "Se ha conectado el jugador " + jugador);
-				dout[jugador].writeInt(jugador);
-				dout[jugador].flush();
-				oout[jugador].writeObject(tablero);
-				oout[jugador].flush();
-				jugador++;
+				this.dout [jugador]= new DataOutputStream(this.socketJugadores[jugador].getOutputStream());
+				this.oout [jugador]= new ObjectOutputStream(this.socketJugadores[jugador].getOutputStream());
+				this.oit[jugador] = new ObjectInputStream(this.socketJugadores[jugador].getInputStream());	
+				System.out.println("partida " + this.nombrePartida + ": " + "Se ha conectado el jugador " + this.jugador);
+				this.dout[jugador].writeInt(this.jugador);
+				this.dout[jugador].flush();
+				this.oout[jugador].writeObject(this.tablero);
+				this.oout[jugador].flush();
+				this.jugador++;
 				
+			}
+			
+			for(int i = 1; i < 5; i++)
+			{
+				this.dout[i].writeInt(0);
+				this.dout[i].flush();
 			}
 			
 			System.out.println("partida " + this.nombrePartida + ": " + "Se han conectado todos los jugadores");
 			
-			jugador = 1;
-			tablero.setTurnoJugador(jugador);
+			this.jugador = 1;
+			this.tablero.setTurnoJugador(this.jugador);
 
-			while(seguirJugando)
+			while(this.seguirJugando)
 			{											
 				for(int i = 1; i < 5; i++)
 				{
-					oout[i].writeObject(tablero);
-					oout[i].flush();
+					this.oout[i].writeObject(this.tablero);
+					this.oout[i].flush();
 				}
-				System.out.println("partida " + this.nombrePartida + ": " + "turno del jugador " + jugador);			
+				System.out.println("partida " + this.nombrePartida + ": " + "turno del jugador " + this.jugador);			
 				try {
-					tablero = (tablero) oit[jugador].readObject();
+					this.tablero = (tablero) oit[this.jugador].readObject();
 					System.out.println("partida " + this.nombrePartida + ": " + "tablero recibido");
 				} catch (ClassNotFoundException e) {
 					e.printStackTrace();
 				}
 				
-				if(tablero.haGanado(jugador))
+				if(this.tablero.haGanado(this.jugador))
 				{
-					seguirJugando = false;
+					this.seguirJugando = false;
+					System.out.println("partida " + this.nombrePartida + ": " + "el jugador " + this.tablero.turnoJugador() + " ha ganado");
 				}
-				jugador = (jugador % 4) + 1;
-				tablero.setTurnoJugador(jugador);
+				else 
+				{
+					this.jugador = (this.jugador % 4) + 1;
+					this.tablero.setTurnoJugador(this.jugador);
+				}
 												
 			}
 			
-			ss.close();
+			for(int i = 1; i < 5; i++)
+			{
+				this.oout[i].writeObject(this.tablero);
+				this.oout[i].flush();
+			}
+			
+			this.ss.close();
 			
 			
 

@@ -11,7 +11,7 @@ import java.util.Scanner;
 import Risk_juego.tablero;
 import Risk_juego.territorio;
 
-public class cliente3 {
+public class cliente6 {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -35,7 +35,7 @@ public class cliente3 {
 		
 		//Inicio
 		
-		try (Socket s = new Socket("localhost", 5000);
+		try (Socket s = new Socket("localhost", 5001);
 			DataInputStream in = new DataInputStream(s.getInputStream());
 			ObjectInputStream oin = new ObjectInputStream(s.getInputStream());
 			ObjectOutputStream oout	= new ObjectOutputStream(s.getOutputStream());

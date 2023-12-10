@@ -401,9 +401,9 @@ public class tablero implements Serializable
 			i++;
 		}
 		
-		tropasNuevas = tropasNuevas + (this.numeroTerritoriosPoseidos(jugador)/3);
+		tropasNuevas = tropasNuevas + (max(this.numeroTerritoriosPoseidos(jugador)/3,3));
 				
-		return max(tropasNuevas,3);
+		return tropasNuevas;
 	}
 	
 	public boolean existeCaminoJugador(territorio t1, territorio t2)
@@ -540,18 +540,12 @@ public class tablero implements Serializable
 
 	public String toString()
 	{
-		String s = "Nombre Tablero: " + this.nombre + "\n" + "turno de jugador" + this.turnoJugador + "\n" + "territorios: " + "\n";
-		int i=0;
-		while(i<this.territorios.size())
-		{
-			s = s + this.territorios.get(i);
-			i++;
-		}		
-		i=0;
+		String s = "Nombre Tablero: " + this.nombre + "\n" + "turno de jugador" + this.turnoJugador + "\n";
+		int i=0;	
 		s = s + "continentes: " + "\n"; 
 		while(i<this.continentes.size())
 		{
-			s = s + this.continentes.get(i);
+			s = s + this.continentes.get(i).toString();
 			i++;
 		}		
 		return s;

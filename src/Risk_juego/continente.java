@@ -106,7 +106,8 @@ public class continente implements Serializable
 		int i=0;
 		while(i<this.territorios.size())
 		{
-			s = s + this.territorios.get(i);
+			s = s + this.territorios.get(i).toString();
+			s = s + "\n";
 			i++;
 		}		
 		return s;
