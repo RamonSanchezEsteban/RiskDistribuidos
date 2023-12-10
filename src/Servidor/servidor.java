@@ -5,11 +5,16 @@ public class servidor {
 
 	public static void main(String[] args) {
 		
-		partida p1 = new partida("1", 5000);
-		partida p2 = new partida("2", 5001);
+		System.out.println("numero de partidas: " + args.length);
 		
-		p1.start();	
-		p2.start();
+		
+		partida[] partidas = new partida[20];
+		int l = args.length;		
+		for(int i = 0; i < l; i++)
+		{
+			partidas[i] = new partida( " " + (i+1), Integer.parseInt(args[i]));
+			partidas[i].start();
+		}		
 	}
 
 }

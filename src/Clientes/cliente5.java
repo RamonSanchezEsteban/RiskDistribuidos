@@ -35,7 +35,7 @@ public class cliente5 {
 		
 		//Inicio
 		
-		try (Socket s = new Socket("localhost", 5001);
+		try (Socket s = new Socket(args[0], Integer.parseInt(args[1]));
 			DataInputStream in = new DataInputStream(s.getInputStream());
 			ObjectInputStream oin = new ObjectInputStream(s.getInputStream());
 			ObjectOutputStream oout	= new ObjectOutputStream(s.getOutputStream());

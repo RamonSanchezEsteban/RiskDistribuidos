@@ -55,7 +55,7 @@ public class partida extends Thread{
 		try
 		{
 			ss = new ServerSocket(this.host);	
-			System.out.println("partida " + this.nombrePartida + ": " + "Servidor iniciado");			
+			System.out.println("partida " + this.nombrePartida + ": " + "Servidor iniciado, " + "puerto: " + this.host);			
 			
 			while(jugador < 5)
 			{
